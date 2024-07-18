@@ -40,10 +40,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: production-file
-          path: ./build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.REACT_SECRETS }} # Ensure the token is correct
-          publish_dir: ./build
+      - name: Deploy with gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.REACT_SECRETS }}
+        run: |
+          git remote set-url origin https://github.com/bk10d/hello.git
+          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
